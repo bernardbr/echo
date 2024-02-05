@@ -22,7 +22,10 @@ app.MapPost(
         (object body, HttpContext context, IConfiguration configuration) =>
         {
             var sections = configuration.GetChildren().Where(c => c.Key.StartsWith("ECHOAPI_", StringComparison.OrdinalIgnoreCase));
-            foreach (var section in sections) context.Response.Headers.Add(section.Key.NormalizeToHttpHeaderName(), section.Value);
+            foreach (var section in sections)
+            {
+                context.Response.Headers.Add(section.Key.NormalizeToHttpHeaderName(), section.Value);
+            }
 
             return Results.Ok(body);
         })
