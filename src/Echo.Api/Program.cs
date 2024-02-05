@@ -24,7 +24,7 @@ app.MapPost(
             var sections = configuration.GetChildren().Where(c => c.Key.StartsWith("ECHOAPI_", StringComparison.OrdinalIgnoreCase));
             foreach (var section in sections) context.Response.Headers.Add(section.Key.NormalizeToHttpHeaderName(), section.Value);
 
-            Results.Ok(body);
+            return Results.Ok(body);
         })
     .WithName("Echo")
     .WithDescription("Echoes the request body")
